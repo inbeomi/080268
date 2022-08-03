@@ -89,7 +89,7 @@ ALTER TABLE highschool_students
 DROP PRIMARY KEY ;
 
 
--- 코드
+-- 각 테이블의 데이터 개수 파악하기
 SELECT COUNT(*) FROM box_office;
 
 SELECT COUNT(*) FROM employees;
