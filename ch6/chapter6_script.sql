@@ -1,24 +1,35 @@
 -- 6-1
 SELECT ABS(1), ABS(-1);
+-- 1, 1
 
 -- 6-2
 SELECT LENGTH('mysql');
+-- 5
 
 -- 6-3
 SELECT 7 % 2, 7 MOD 2, 7 / 2, 7 DIV 2;
+-- 1, 1, 3.5, 3
 
 -- 6-4
 SELECT CEIL(4.5), FLOOR(4.5);
+-- SELECT CEILING(4.5), FLOOR(4.5);
+-- 5, 4
 
 -- 6-5
 SELECT LN(100), LOG(100), LOG(10, 100), LOG10(100);
+-- LOG(100) : ìƒëµ ì‹œ, ë°‘ì´ eì´ë‹¤. 
+-- LOG2(4)ë„ ê°€ëŠ¥
 
 -- 6-6
-SELECT MOD(5,4), 5 MOD 4, 5 % 4 ;
+SELECT MOD(5,4), 5 MOD 4, 5 % 4 ; -- ë‚˜ë¨¸ì§€ë¥¼ êµ¬í•¨
+-- 1, 1, 1
 
 -- 6-7
-SELECT POWER(4,3), SQRT(3), SIGN(5), SIGN(-7);
+SELECT POW(4,3), POWER(4,3), SQRT(3), SIGN(5), SIGN(-7);
+-- 64, 64, 1.712..., 1, -1
 
+-- ROUDD : íŠ¹ì • ìë¦¬ìˆ˜ì—ì„œ ë°˜ì˜¬ë¦¼
+-- TRUNCATE : íŠ¹ì • ìë¦¬ìˆ˜ì—ì„œ ìë¦„
 -- 6-8
 SELECT ROUND(2.4536, 1), ROUND(2.4536, 2), ROUND(2.4536, 3), ROUND(2.4536,0), ROUND(2.4536);
 
@@ -30,7 +41,7 @@ SELECT ROUND(1153.456, -1), ROUND(1153.456, -2),
 SELECT RAND(), RAND(3), RAND(5);
 
 -- 6-11
-SELECT CHAR_LENGTH('SQL'), LENGTH('SQL'), CHAR_LENGTH('È«±æµ¿'), LENGTH('È«±æµ¿');
+SELECT CHAR_LENGTH('SQL'), LENGTH('SQL'), CHAR_LENGTH('í™ê¸¸ë™'), LENGTH('í™ê¸¸ë™');
 
 -- 6-12
 SELECT CONCAT('This','Is','MySQL') AS CONCAT1, 
@@ -63,7 +74,7 @@ SELECT LEFT('ThisIsMySQL', 4),
        
 -- 6-18
 SELECT REPEAT('SQL',3),
-       REPLACE('»ıÀÏ ÃàÇÏÇØ Ã¶¼ö¾ß', 'Ã¶¼ö', '¿µÈñ') REP,
+       REPLACE('ìƒì¼ ì¶•í•˜í•´ ì² ìˆ˜ì•¼', 'ì² ìˆ˜', 'ì˜í¬') REP,
        REVERSE('SQL');
        
        
@@ -223,10 +234,10 @@ SELECT CASE 1 WHEN 0 THEN 'A'
               WHEN 1 THEN 'B'
               ELSE 'None'
        END CASE2,
-       CASE WHEN 25 BETWEEN 1  AND 19 THEN '10´ë'
-            WHEN 25 BETWEEN 20 AND 29 THEN '20´ë'
-            WHEN 25 BETWEEN 30 AND 39 THEN '30´ë'
-            ELSE '30´ë ÀÌ»ó'
+       CASE WHEN 25 BETWEEN 1  AND 19 THEN '10ëŒ€'
+            WHEN 25 BETWEEN 20 AND 29 THEN '20ëŒ€'
+            WHEN 25 BETWEEN 30 AND 39 THEN '30ëŒ€'
+            ELSE '30ëŒ€ ì´ìƒ'
        END CASE3;
        
        
@@ -254,14 +265,14 @@ USE mywork;
 SELECT years, ranks, movie_name, release_date, audience_num, ROUND(sale_amt / 100000000) AS sales
   FROM box_office
  WHERE YEAR(release_date) = 2019
-   AND rep_country = 'ÇÑ±¹'
+   AND rep_country = 'í•œêµ­'
    AND audience_num >= 5000000 ; 
    
    
 -- 6-47
 SELECT ranks, movie_name, DAYNAME(release_date),
-       CASE WHEN QUARTER(release_date) IN (1,2) THEN '»ó¹İ±â'
-            ELSE 'ÇÏ¹İ±â'
+       CASE WHEN QUARTER(release_date) IN (1,2) THEN 'ìƒë°˜ê¸°'
+            ELSE 'í•˜ë°˜ê¸°'
        END case1
   FROM box_office
  WHERE YEAR(release_date) = 2019
@@ -269,23 +280,23 @@ SELECT ranks, movie_name, DAYNAME(release_date),
 ORDER BY 1; 
 
 
--- 1ºĞ ÄûÁî 3
-SELECT REPLACE('»êÅä³¢ Åä³¢¾ß', 'Åä³¢', '°ÅºÏÀÌ');
+-- 1ë¶„ í€´ì¦ˆ 3
+SELECT REPLACE('ì‚°í† ë¼ í† ë¼ì•¼', 'í† ë¼', 'ê±°ë¶ì´');
 
--- 1ºĞ ÄûÁî 4
+-- 1ë¶„ í€´ì¦ˆ 4
 SELECT DAYNAME(LAST_DAY(CURDATE()));
 
--- 1ºĞ ÄûÁî 5
+-- 1ë¶„ í€´ì¦ˆ 5
 USE world;
  
-SELECT name, IFNULL(indepyear, '¾øÀ½')
+SELECT name, IFNULL(indepyear, 'ì—†ìŒ')
   FROM country;
 
 
 -- Self Check1
-SELECT ADDDATE('20210512', 100) 100ÀÏ,
-       ADDDATE('20210512', 500) 500ÀÏ,
-       ADDDATE('20210512', 1000) 1000ÀÏ;
+SELECT ADDDATE('20210512', 100) 100ì¼,
+       ADDDATE('20210512', 500) 500ì¼,
+       ADDDATE('20210512', 1000) 1000ì¼;
 
 -- Self Check2
 USE mywork;
