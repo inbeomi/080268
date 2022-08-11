@@ -21,7 +21,7 @@ SELECT continent, region
  
 
 -- 7-4
-SELECT SUBSTRING(district,1,2) DO
+SELECT SUBSTRING(district,1,2) DO -- ì²« ë²ˆì§¸ ìœ„ì¹˜ì—ì„œ ë‘ ê¸€ìë¥¼ ì˜ë¼ì˜´
   FROM city
  WHERE countrycode = 'KOR'
  GROUP BY SUBSTRING(district,1,2)
@@ -29,6 +29,8 @@ SELECT SUBSTRING(district,1,2) DO
  
 
 -- 7-5
+-- ê·¸ë£¹í™” ëŒ€ìƒ ì»¬ëŸ¼ê³¼ ì¡°í™”í•˜ëŠ” ì»¬ëŸ¼ì´ ì¼ì¹˜í•´ì•¼ ì˜¬ë°”ë¥¸ ì§‘ê³„ ì¿¼ë¦¬ê°€ ê°€ëŠ¥í•¨
+-- ì˜¤ë¥˜ëŠ” ì•ˆë‚˜ê¸´ í•˜ì§€ë§Œ ì„œë¡œ ì¼ì¹˜í•˜ê²Œ ì»¬ëŸ¼ë“¤ì„ ì‘ì„±í•˜ì. 
 SELECT continent
   FROM country
  GROUP BY region
@@ -36,7 +38,7 @@ SELECT continent
  
 
 -- 7-6
-SELECT DISTINCT continent
+SELECT DISTINCT continent -- í•´ë‹¹ ì»¬ëŸ¼ì˜ ê³ ìœ í•œ ê°’ë§Œ ì¡°íšŒë¨. GROUP BY ì ˆì„ ì‚¬ìš©í•œ ê²ƒê³¼ ê°™ì€ íš¨ê³¼ë¥¼ ëƒ„
   FROM country;
   
 
@@ -58,18 +60,18 @@ SELECT COUNT(*), COUNT(2)
  
        
 -- 7-10
-SELECT COUNT(DISTINCT continent)
+SELECT COUNT(DISTINCT continent) -- ê³ ìœ í•œ ê°’ë“¤ì˜ ê°œìˆ˜ë¥¼ ì¹´ìš´íŠ¸í•¨
   FROM country; 
   
 
 -- 7-11
-SELECT MAX(population), MIN(population), AVG(population)
+SELECT MAX(population), MIN(population), AVG(population) -- ìµœëŒ€, ìµœì†Œ, í‰ê· 
   FROM COUNTRY
  WHERE continent = 'Europe';
  
 
 -- 7-12
-SELECT SUM(population), VAR_POP(population), STDDEV_POP(population)
+SELECT SUM(population), VAR_POP(population), STDDEV_POP(population) -- í•©ê³„, ë¶„ì‚°, í‘œì¤€í¸ì°¨
   FROM COUNTRY
  WHERE continent = 'Europe';
  
@@ -77,7 +79,7 @@ SELECT SUM(population), VAR_POP(population), STDDEV_POP(population)
 -- 7-13
 USE mywork;
 
--- ¿¬µµº° °³ºÀ ¿µÈ­ Æí¼ö Áı°èÇÏ±â
+-- ì—°ë„ë³„ ê°œë´‰ ì˜í™” í¸ìˆ˜ ì§‘ê³„í•˜ê¸°
 SELECT YEAR(release_date) release_year, COUNT(*)
   FROM box_office
  GROUP BY YEAR(release_date)
@@ -85,7 +87,7 @@ SELECT YEAR(release_date) release_year, COUNT(*)
  
 
 -- 7-14
--- 2019³â °³ºÀ ¿µÈ­ÀÇ À¯Çüº° ÃÖ´ë, ÃÖ¼Ò ¸ÅÃâ¾×°ú ÀüÃ¼ ¸ÅÃâ¾× Áı°èÇÏ±â
+-- 2019ë…„ ê°œë´‰ ì˜í™”ì˜ ìœ í˜•ë³„ ìµœëŒ€, ìµœì†Œ ë§¤ì¶œì•¡ê³¼ ì „ì²´ ë§¤ì¶œì•¡ ì§‘ê³„í•˜ê¸°
 SELECT movie_type, MAX(sale_amt), MIN(sale_amt), SUM(sale_amt)
   FROM box_office
  WHERE YEAR(release_date) = 2019
@@ -94,11 +96,11 @@ SELECT movie_type, MAX(sale_amt), MIN(sale_amt), SUM(sale_amt)
  
 
 -- 7-15
--- 2019³â °³ºÀ ¿µÈ­ Áß ¸ÅÃâ¾×ÀÌ1¾ï ¿ø ÀÌ»óÀÎ ¿µÈ­ÀÇ ºĞ±âº°, ¹è±Ş»çº° °³ºÀ ¿µÈ­ ¼ö¿Í ¸ÅÃâ¾× Áı°èÇÏ±â
-SELECT QUARTER(release_date) ºĞ±â, distributor ¹è±Ş»ç, 
-       COUNT(*) ¿µÈ­Æí¼ö, ROUND(SUM(sale_amt) / 100000000) ¸ÅÃâ_¾ï¿ø
+-- 2019ë…„ ê°œë´‰ ì˜í™” ì¤‘ ë§¤ì¶œì•¡ì´1ì–µ ì› ì´ìƒì¸ ì˜í™”ì˜ ë¶„ê¸°ë³„, ë°°ê¸‰ì‚¬ë³„ ê°œë´‰ ì˜í™” ìˆ˜ì™€ ë§¤ì¶œì•¡ ì§‘ê³„í•˜ê¸°
+SELECT QUARTER(release_date) ë¶„ê¸°, distributor ë°°ê¸‰ì‚¬, 
+       COUNT(*) ì˜í™”í¸ìˆ˜, ROUND(SUM(sale_amt) / 100000000) ë§¤ì¶œ_ì–µì›
   FROM box_office
- WHERE 1=1
+ WHERE 1=1 -- ì´ê²ƒì€ ì™œ ìˆëŠ”ê±°ì§€? ì—†ì–´ë„ ë™ì¼í•œ ê²°ê³¼ê°’ì´ ë°˜í™˜ë¨.
    AND EXTRACT(YEAR FROM release_date) =  2019
    AND distributor IS NOT NULL
    AND sale_amt >= 100000000
@@ -107,7 +109,7 @@ SELECT QUARTER(release_date) ºĞ±â, distributor ¹è±Ş»ç,
 
 
 -- 7-16
-SELECT movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
+SELECT movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡
   FROM box_office
  WHERE YEAR(release_date) = 2019
    AND SALE_AMT > 10000000
@@ -116,50 +118,47 @@ SELECT movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
  
        
 -- 7-17
-SELECT movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
+SELECT movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡
   FROM box_office
  WHERE YEAR(release_date) = 2019
    AND SALE_AMT > 10000000
- GROUP BY movie_type WITH ROLLUP ;
+ GROUP BY movie_type WITH ROLLUP ; -- WITH ROLLUPìœ¼ë¡œ ì†Œê³„ì™€ ì´ê³„ë¥¼ êµ¬í•¨.
  
        
 -- 7-18
-SELECT MONTH(release_date) ¿ù, 
-       movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
+SELECT MONTH(release_date) ì›”, 
+       movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡
   FROM box_office
  WHERE YEAR(release_date) = 2019
    AND QUARTER(release_date) = 1
    AND SALE_AMT > 10000000
- GROUP BY MONTH(release_date), movie_type WITH ROLLUP ;
+ GROUP BY MONTH(release_date), movie_type WITH ROLLUP ; -- GROUP BYì—ì„œ ì§€ì •ëœ ì»¬ëŸ¼ ë³„ë¡œ ì†Œê³„ì™€ ì´ê³„ë¥¼ ê³„ì‚°í•¨
        
        
 -- 7-19
-SELECT movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
+SELECT movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡
   FROM box_office
  WHERE YEAR(release_date) = 2019
  GROUP BY movie_type WITH ROLLUP;
        
        
 -- 7-20
-SELECT MONTH(release_date) ¿ù, movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×, GROUPING(movie_type)
-  FROM box_office
- WHERE YEAR(release_date) = 2019
-   AND QUARTER(release_date) = 1
+SELECT MONTH(release_date) ì›”, movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡, GROUPING(movie_type) -- GROUPINGì€ WITH ROLLUPìœ¼ë¡œ ë°˜í™˜ëœ ê°’ì€ 1ë¡œ, ì•„ë‹Œ ê²ƒ(ê¸°ì¡´ ë°ì´í„°)
    AND SALE_AMT > 10000000 
  GROUP BY MONTH(release_date), movie_type WITH ROLLUP;
        
        
 -- 7-21
-SELECT IF(GROUPING(movie_type) = 1, 'ÀüÃ¼ÇÕ°è', movie_type) ¿µÈ­À¯Çü, 
-       SUM(sale_amt) ±İ¾× 
+SELECT IF(GROUPING(movie_type) = 1, 'ì „ì²´í•©ê³„', movie_type) ì˜í™”ìœ í˜•, -- 1ì€ WITH ROLLUPìœ¼ë¡œ ë°˜í™˜ëœ ê°’ì´ë¼ NULLì„ 'ì „ì²´í•©ê³„'ë¡œ í‘œí˜„í•˜ê¸° ìœ„í•¨
+       SUM(sale_amt) ê¸ˆì•¡ 
   FROM box_office
  WHERE YEAR(release_date) = 2019
  GROUP BY movie_type WITH ROLLUP;
  
        
 -- 7-22
-SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù, 
-       COUNT(*) °³ºÀÆí¼ö
+SELECT EXTRACT(YEAR_MONTH FROM release_date) ê°œë´‰ë…„ì›”, 
+       COUNT(*) ê°œë´‰í¸ìˆ˜
   FROM box_office
  WHERE ranks BETWEEN 1 AND 10
  GROUP BY EXTRACT(YEAR_MONTH FROM release_date)
@@ -167,8 +166,8 @@ SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù,
        
        
 -- 7-23
-SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù, 
-       COUNT(*) °³ºÀÆí¼ö
+SELECT EXTRACT(YEAR_MONTH FROM release_date) ê°œë´‰ë…„ì›”, 
+       COUNT(*) ê°œë´‰í¸ìˆ˜
   FROM box_office
  WHERE 1=1
    AND ranks BETWEEN 1 AND 10
@@ -178,20 +177,20 @@ SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù,
        
        
 -- 7-24
-SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù, 
-       COUNT(*) °³ºÀÆí¼ö
+SELECT EXTRACT(YEAR_MONTH FROM release_date) ê°œë´‰ë…„ì›”, 
+       COUNT(*) ê°œë´‰í¸ìˆ˜
   FROM box_office
  WHERE 1=1
    AND ranks BETWEEN 1 AND 10
  GROUP BY EXTRACT(YEAR_MONTH FROM release_date)
- HAVING COUNT(*) > 1
+ HAVING COUNT(*) > 1 -- ì§‘ê³„ í•¨ìˆ˜ ê²°ê³¼ ê°’ì— ëŒ€í•œ ì¡°ê±´ì€ HAVING ì ˆë¡œ ì£¼ì–´ì•¼ í•¨.
  ORDER BY 1 DESC;
        
 
 -- 7-25
-SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù, 
-       COUNT(*) °³ºÀÆí¼ö,
-       ROUND(SUM(sale_amt) / 100000000) ±İ¾×_¾ï¿ø
+SELECT EXTRACT(YEAR_MONTH FROM release_date) ê°œë´‰ë…„ì›”, 
+       COUNT(*) ê°œë´‰í¸ìˆ˜,
+       ROUND(SUM(sale_amt) / 100000000) ê¸ˆì•¡_ì–µì›
   FROM box_office
  WHERE 1=1
    AND ranks BETWEEN 1 AND 10
@@ -202,8 +201,8 @@ SELECT EXTRACT(YEAR_MONTH FROM release_date) °³ºÀ³â¿ù,
  
  
 -- 7-26
-SELECT MONTH(release_date) ¿ù, 
-       movie_type ¿µÈ­À¯Çü, SUM(sale_amt) ±İ¾×
+SELECT MONTH(release_date) ì›”, 
+       movie_type ì˜í™”ìœ í˜•, SUM(sale_amt) ê¸ˆì•¡
   FROM box_office
  WHERE YEAR(release_date) = 2019
    AND QUARTER(release_date) = 1
@@ -212,14 +211,14 @@ SELECT MONTH(release_date) ¿ù,
  HAVING GROUPING(movie_type) = 1;
        
 
--- 1ºĞÄûÁî 1
+-- 1ë¶„í€´ì¦ˆ 1
 USE world;
 
 SELECT countrycode, COUNT(*)
   FROM city
  GROUP BY countrycode;
 
--- 1ºĞÄûÁî 2
+-- 1ë¶„í€´ì¦ˆ 2
 USE world;
 
 SELECT continent, COUNT(*)
@@ -238,9 +237,9 @@ SELECT continent, SUM(surfacearea), SUM(population), COUNT(*)
 -- Self Check2
 USE mywork;
 
-SELECT CASE WHEN ranks BETWEEN 1 AND 10 THEN '»óÀ§10'
-            ELSE '³ª¸ÓÁö'
-       END ¼øÀ§º°, SUM(sale_amt)
+SELECT CASE WHEN ranks BETWEEN 1 AND 10 THEN 'ìƒìœ„10'
+            ELSE 'ë‚˜ë¨¸ì§€'
+       END ìˆœìœ„ë³„, SUM(sale_amt)
   FROM box_office
  WHERE YEAR(release_date) = 2019
  GROUP BY 1;
