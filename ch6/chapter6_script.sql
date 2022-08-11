@@ -97,79 +97,82 @@ SELECT STRCMP('MySQL','mysql') SAME,
        STRCMP('MySQL2','mysql1') LARGE;
        
 -- 6-22
-SELECT CURDATE(), CURRENT_DATE(), CURRENT_DATE,
-       CURTIME(), CURRENT_TIME(), CURRENT_TIME,
-       NOW(), CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP;
+SELECT CURDATE(), CURRENT_DATE(), CURRENT_DATE, -- 현재 날짜 반환
+       CURTIME(), CURRENT_TIME(), CURRENT_TIME, -- 현재 시간 반환
+       NOW(), CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP; --현재 날짜와 시간을 반환
        
 -- 6-23
-SELECT DAYNAME('2021-03-10'),
-       DAYOFMONTH('2021-03-10'), DAY('2021-03-10'),
-       DAYOFWEEK('2021-03-10'),
-       DAYOFYEAR('2021-03-10');
+SELECT DAYNAME('2021-03-10'), -- 요일 반환 (ex. 금요일)
+       DAYOFMONTH('2021-03-10'), DAY('2021-03-10'), -- 일 반환 (ex. 10)
+       DAYOFWEEK('2021-03-10'), -- 요일별 숫자를 반환(1: 일요일, 7: 토요일)
+       DAYOFYEAR('2021-03-10'); -- 1년 기준의 날짜를 일수로 반환 (1~366)
        
        
 -- 6-24
-SELECT LAST_DAY('2021-03-10'),
-       YEAR('2021-03-10'), 
-       MONTH('2021-03-10'), 
-       QUARTER('2021-03-10'),
-       WEEKOFYEAR('2021-03-10');
+SELECT LAST_DAY('2021-03-10'), -- 해당 일자가 속한 월의 마자막 날짜 반환
+       YEAR('2021-03-10'), -- 연 반환
+       MONTH('2021-03-10'), -- 월 반환
+       QUARTER('2021-03-10'), -- 분기 반환
+       WEEKOFYEAR('2021-03-10'); -- 주차 반환(1~53주)
+       HOUR('10:53:24'); -- 시간 반환
+       MINUTE('10:53:24'); -- 분 반환 
+       SECOND('10:53:24'); -- 초 반환
        
 -- 6-25
-SELECT DATE('2021-03-10 10:23:31'),
-       TIME('2021-03-10 10:23:31');       
+SELECT DATE('2021-03-10 10:23:31'), -- 날짜 반환 (ex. 2021-03-10)
+       TIME('2021-03-10 10:23:31'); -- 시간 반환 (ex. 10:23:31)      
        
 -- 6-26
 SELECT DATE_ADD('2021-01-20', INTERVAL 5 DAY) DATEADD,
-       ADDDATE('2021-01-20', INTERVAL 5 DAY) ADD_DATE1,
-       ADDDATE('2021-01-20', 5 ) ADD_DATE2;    
+       ADDDATE('2021-01-20', INTERVAL 5 DAY) ADD_DATE1, -- 표현식 단위만큼 더한 날짜 반환
+       ADDDATE('2021-01-20', 5 ) ADD_DATE2;   -- days를 더한 날짜 반환
        
 -- 6-27
-SELECT DATE_ADD('2021-01-20', INTERVAL '1 2' YEAR_MONTH) DATEADD,
-       ADDDATE('2021-01-20', INTERVAL '1 2' DAY_HOUR ) ADD_DATE;
+SELECT DATE_ADD('2021-01-20', INTERVAL '1 2' YEAR_MONTH) DATEADD, -- 1년 2개월을 더하라
+       ADDDATE('2021-01-20', INTERVAL '1 2' DAY_HOUR ) ADD_DATE; -- 1일 2시간을 더하라
        
 -- 6-28
 SELECT DATE_SUB('2021-01-20', INTERVAL 5 DAY) DATESUB,
-       SUBDATE('2021-01-20', INTERVAL 5 DAY) SUB_DATE1,
-       SUBDATE('2021-01-20', 5 ) SUB_DATE2;
+       SUBDATE('2021-01-20', INTERVAL 5 DAY) SUB_DATE1, -- 표현식 단위만큼 뺀 날짜 반환
+       SUBDATE('2021-01-20', 5 ) SUB_DATE2; -- days를 뺀 날짜 반환
        
 -- 6-29
-SELECT EXTRACT(YEAR_MONTH    FROM '2020-01-20 13:32:03') YEARMON,
+SELECT EXTRACT(YEAR_MONTH    FROM '2020-01-20 13:32:03') YEARMON, -- 표현식으로 지정된 부분 반환
        EXTRACT(DAY_HOUR      FROM '2020-01-20 13:32:03') DAYHOUR,
        EXTRACT(MINUTE_SECOND FROM '2020-01-20 13:32:03') MINSEC;
        
        
 -- 6-30
-SELECT DATEDIFF('2021-01-31','2021-01-21') Diff1,
+SELECT DATEDIFF('2021-01-31','2021-01-21') Diff1, -- 두 날짜 사이의 뺀 날짜를 일수로 반환
        DATEDIFF('2021-01-31','2021-02-01') Diff2,
        DATEDIFF('2021-01-31 00:00:00','2021-01-30 23:59:59') Diff3;
        
        
 -- 6-31
-SELECT DATE_FORMAT('2021-01-20 13:42:54','%d-%b-%Y') Fmt1,
-       DATE_FORMAT('2021-02-20 13:42:54','%U %W %j') Fmt2;
+SELECT DATE_FORMAT('2021-01-20 13:42:54','%d-%b-%Y') Fmt1, -- date를 format 형태로 반환 (ex. 20-Jan-2021)
+       DATE_FORMAT('2021-02-20 13:42:54','%U %W %j') Fmt2; -- (ex. 07-Saturday-051)
        
        
 -- 6-32
-SELECT STR_TO_DATE('21,01,2021','%d,%m,%Y') CONV1,
-       STR_TO_DATE('19:30:17','%H:%i:%s') CONV2,
-       STR_TO_DATE('19:30:17','%h:%i:%s') CONV3;
+SELECT STR_TO_DATE('21,01,2021','%d,%m,%Y') CONV1, -- str을 format 형태로 반환 (ex. 2021-01-21)
+       STR_TO_DATE('19:30:17','%H:%i:%s') CONV2, -- (ex. 19:30:17)
+       STR_TO_DATE('19:30:17','%h:%i:%s') CONV3; -- (ex. Null) H : 24시간 h: 12시간 단위
 
 
 -- 6-33
-SELECT MAKEDATE(2021,1) MDATE1,
+SELECT MAKEDATE(2021,1) MDATE1, -- 해당하는 일수를 더한 날짜를 반환
        MAKEDATE(2021,100) MDATE2,
        MAKEDATE(2020,365) MDATE3;
 
 
 -- 6-34
-SELECT SYSDATE(), SLEEP(2), SYSDATE();
+SELECT SYSDATE(), SLEEP(2), SYSDATE(); -- 해당 함수가 실행된 날짜와 시간을 반환, sleep(2) : 2초를 쉬어라
 
-SELECT NOW(), SLEEP(2), NOW();
+SELECT NOW(), SLEEP(2), NOW(); -- N해당 문장이 실행된 날짜와 시간을 반환. 따라서 같은 값을 가짐
 
 
 -- 6-35
-SELECT WEEK('2021-01-03', 0) MODE0,
+SELECT WEEK('2021-01-03', 0) MODE0, -- 해당일이 몇 주차인지 반환
        WEEK('2021-01-03', 1) MODE1,
        WEEK('2021-01-03', 2) MODE2,
        WEEK('2021-01-03', 3) MODE3,
@@ -179,7 +182,7 @@ SELECT WEEK('2021-01-03', 0) MODE0,
        WEEK('2021-01-03', 7) MODE7;
        
 -- 6-36       
-SELECT YEARWEEK('2021-01-03')    NOMODE,
+SELECT YEARWEEK('2021-01-03')    NOMODE, -- 해당일이 몇 년도 몇 주자인지 반환
        YEARWEEK('2021-01-03', 0) MODE0,
        YEARWEEK('2021-01-03', 1) MODE1,
        YEARWEEK('2021-01-03', 2) MODE2,
@@ -190,16 +193,18 @@ SELECT YEARWEEK('2021-01-03')    NOMODE,
        YEARWEEK('2021-01-03', 7) MODE7;
        
 -- 6-37
+-- CAST(epxr AS type) : 데이터 형(타입)을 변환하는 함수
 SELECT CAST(10 AS CHAR)                CONV_CHAR,
        CAST('-10' AS SIGNED )          CONV_INT,
        CAST('10.2131' AS DECIMAL)      CONV_DEC1,
-       CAST('10.2131' AS DECIMAL(6,4)) CONV_DEC2,
+       CAST('10.2131' AS DECIMAL(6,4)) CONV_DEC2, -- 총 6자리, 소숫점 이하 4자리
        CAST('10.2131' AS DOUBLE)       CONV_DOUBLE,
-       CAST('2021-10-31' AS DATE)      CONV_DATE,
-       CAST('2021-10-31' AS DATETIME)  CONV_DATETIME;
+       CAST('2021-10-31' AS DATE)      CONV_DATE, -- 날짜 반환
+       CAST('2021-10-31' AS DATETIME)  CONV_DATETIME; -- 날짜 및 시간 반환
        
        
 -- 6-38
+-- CONVERT(expr, type) : 위와 동일
 SELECT CONVERT(10, CHAR)                CONV_CHAR,
        CONVERT('-10', SIGNED )          CONV_INT,
        CONVERT('10.2131', DECIMAL)      CONV_DEC1,
@@ -210,8 +215,9 @@ SELECT CONVERT(10, CHAR)                CONV_CHAR,
        
        
 -- 6-39
+-- IF(조건, 참, 거짓) EXCEL 함수와 동일
 SELECT IF( 2 > 1, 1, 0) IF1,
-       IF( 'A' = 'a', 'SAME', 'NOT SAME') IF2,
+       IF( 'A' = 'a', 'SAME', 'NOT SAME') IF2, -- MYSQL에서는 대소문자 구분 x
        IF( 1=2, 1, 'A') IF3;
        
        
@@ -221,12 +227,15 @@ SELECT IFNULL( 1, 0) IFNULL1,
        
        
 -- 6-41
+-- 두 개의 표현식이 같으면 NULL, 아니면 첫 번째 표현식을 반환
 SELECT NULLIF(1, 1) NULLIF1,
        NULLIF(1, 0) NULLIF2,
        NULLIF(NULL, NULL) NULLIF3;
        
        
 -- 6-42
+-- 흐름 제어 함수 ifelse 문과 비슷
+-- 두 가지 형태의 표현 방식이 있음
 SELECT CASE 1 WHEN 0 THEN 'A'
               WHEN 1 THEN 'B'
        END CASE1,
@@ -242,13 +251,14 @@ SELECT CASE 1 WHEN 0 THEN 'A'
        
        
 -- 6-43
+-- 특정 시간 동안 대기하다가 0을 반환함
 SELECT SLEEP(5);
 
 
 -- 6-44
 USE mywork;
 
-SELECT DATABASE(), SCHEMA(), USER();
+SELECT DATABASE(), SCHEMA(), USER(); -- 데이터베이스 이름, 사용자 이름 반환
 
 
 -- 6-45
